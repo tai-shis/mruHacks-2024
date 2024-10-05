@@ -25,6 +25,9 @@ class GamePlayer:
 	def draw(self):
 		pass
 	
+	def end(self):
+		self.running = False
+		
 	def run(self):
 		
 		self.running = True

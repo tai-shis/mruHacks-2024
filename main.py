@@ -2,48 +2,36 @@ import pygame
 from playerobject import Player
 import gameplayer
 import taskbar
-import playerobject
+from taskbar import load_taskbar
 
-# Variable initializations
+# Initialize player
 player1 = Player("player33")
 
-user_input_small = ""
-medium_goal = ""
-large_goal = ""
-
+# Lists to hold the goals
 small_goal_list = []
 medium_goal_list = []
 large_goal_list = []
 
+# Function to get goals from user
+def get_goals_from_user(goal_type):
+    goal_list = []
+    while True:
+        user_input = input(f"Please enter your {goal_type} goal (or press Enter to finish): ")
+        if user_input == "":  # Exit the loop if input is empty
+            break
+        goal_list.append(user_input)
+    return goal_list
 
+# Get small, medium, and large goals from user
+# Get small, medium, and large goals from user
+small_goal_list = get_goals_from_user("small")
+medium_goal_list = get_goals_from_user("medium")
+large_goal_list = get_goals_from_user("large")
 
-# Get goals from user input
-small_goal = input("Please put in your small goals: ")
-if(isinstance(small_goal, str)): #input will always return as a string, so dont need probs
-    while(small_goal != "" or small_goal != "done"): #user input x_goal doesnt exist?
-        small_goal_list.append(small_goal)
-        small_goal = input("Please put in your small goals: ")
-    player1.goals_to_goals(small_goal_list)
+# Set goals for the player (corrected method calls)
+player1.set_small_goals(small_goal_list)
+player1.set_medium_goals(medium_goal_list)
+player1.set_large_goals(large_goal_list)
 
-
-medium_goal = input("Please put in your medium goals: ") # if medium goal input is invalid it would have added to list
-
-while(medium_goal != "" or medium_goal != "done"):
-    medium_goal_list.append(medium_goal)
-    medium_goal = input("Please put in your medium goals: ") # would have added last value inputted (invalid)
-
-    
-player1.goals_to_goals(medium_goal_list)
-    
-    
-large_goal = input("Please put in your large goals: ")
-
-while(large_goal != "" or large_goal != "done"):
-    large_goal_list.append(large_goal)
-    large_goal = input("Please put in your large goals: ")
-
-    
-player1.goals_to_goals(large_goal_list)
-    
-
-
+# Pass the goals to the taskbar to display as checklists
+load_taskbar(small_goal_list, medium_goal_list, large_goal_list)
