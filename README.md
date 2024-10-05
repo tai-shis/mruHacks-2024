@@ -1,0 +1,1 @@
+Start of README for mruhacks 2024 project
