@@ -52,7 +52,8 @@ MediumTasks = ["Task 1: Lock in", "Task 2: Learn Tkinter", "Task 3: Build this s
 for task in MediumTasks: 
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(medium, text=task, variable=var)
+    checkbutton = Checkbutton(medium, text=task, variable=var,
+                                  command=lambda v=var, t=task: check_checkbox(v, t))
     checkbutton.pack(anchor="w", padx=20)
 
 # Add header and checkboxes to the "Large Task" tab
@@ -65,7 +66,8 @@ LargeTasks = ["Do Comp 2655 Midterm" , "Finish Assignment 4"]
 for task in LargeTasks: #replace with large task array passed from main object
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(large, text=task, variable=var)
+    checkbutton = Checkbutton(large, text=task, variable=var,
+                                  command=lambda v=var, t=task: check_checkbox(v, t))
     checkbutton.pack(anchor="w", padx=20)
 
 # Start the Tkinter event loop
