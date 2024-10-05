@@ -1,6 +1,6 @@
 
 import pygame
-class Main:
+class GamePlayer:
 	
 	def __init__(self):
 		pygame.init()
@@ -41,7 +41,7 @@ class Main:
 			pygame.display.flip()
 
 if __name__ == '__main__':
-	main = Main()
+	main = GamePlayer()
 	print("starting...")
 	main.run()
 	print("shuting down...")
