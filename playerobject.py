@@ -1,7 +1,10 @@
 class Goal:
         def __init__(self, goal: str) -> None:
             self.goal = goal
-            self.is_comleted = False #default to false, can change to true
+            self.is_completed = False #default to false, can change to true
+
+        def __str__(self) -> str:
+            return f"[goal: {self.goal}, is_completed: {self.is_completed}]"
 
 class Player:
     def __init__(self, name: str) -> None:
