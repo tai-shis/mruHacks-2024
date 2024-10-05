@@ -25,13 +25,13 @@ while(user_input_small == "" or user_input_small != "done" or user_input_small =
     
 
 while(user_input_medium == "" or user_input_medium != "done" or user_input_medium == "none"):
-    medium_goal = input("PLease put in your small goals: ")
+    medium_goal = input("PLease put in your medium goals: ")
     medium_goal_list.append(medium_goal)
     
     
 
 while(user_input_large == "" or user_input_large != "done" or user_input_large == "none"):
-    large_goal = input("PLease put in your small goals: ")
+    large_goal = input("PLease put in your large goals: ")
     large_goal_list.append(large_goal)
     
 
