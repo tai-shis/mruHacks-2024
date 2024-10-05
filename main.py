@@ -25,7 +25,8 @@ if(user_input_small  != ""):
     
 while(user_input_small != ""):
     user_input_small = input("PLease put in your small goals: ")
-    small_goal_list.append(user_input_small)
+    if(user_input_small  != ""):
+        small_goal_list.append(user_input_small)
     
 player1.goals_to_goals(small_goal_list)
 
@@ -35,9 +36,10 @@ if(user_input_medium != ""):
     medium_goal_list.append(user_input_medium)
 while(user_input_medium != ""):
     user_input_medium = input("PLease put in your medium goals: ")
-    medium_goal_list.append(user_input_medium)
+    if(user_input_medium != ""):
+        medium_goal_list.append(user_input_medium)
     
-player1.golas_to_goals(medium_goal_list)
+player1.goals_to_goals(medium_goal_list)
     
 # Get large goals from user
 user_input_large = input("PLease put in your large goals: ")
@@ -45,7 +47,8 @@ if(user_input_large != ""):
     large_goal_list.append(user_input_large)
 while(user_input_large != "" ):
     user_input_large = input("PLease put in your large goals: ")
-    large_goal_list.append(user_input_large)
+    if(user_input_large != ""):
+        large_goal_list.append(user_input_large)
     
 player1.goals_to_goals(large_goal_list)
     
