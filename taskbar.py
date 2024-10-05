@@ -8,7 +8,15 @@ window = Tk()
 notebook = ttk.Notebook(window)
 
 # Variable to store the checkbox state
+def check_checkbox(var, task_name)->bool:
+    if var.get() == 1:
+        print (f"{task_name} is complete!")
+        return True
+        
 
+    else:
+        print (f"{task_name} is unchecked")
+        return False
 
 # Create frames for each tab
 small = Frame(notebook)
@@ -29,10 +37,11 @@ SmallTasks = ["Task 1: Hello World", "Task 2: Learn Python", "Task 3: Build a GU
 check_vars = []
 
 # Create checkbuttons in a for loop
-for task in SmallTasks: # replace tasks with array passed from main
+for i, task in enumerate(SmallTasks):
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(small, text=task, variable=var)
+    checkbutton = Checkbutton(small, text=task, variable=var,
+                                  command=lambda v=var, t=task: check_checkbox(v, t))
     checkbutton.pack(anchor="w", padx=20)
 # Add header and checkboxes to the "Medium Task" tab
 Label(medium, text="Medium Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
@@ -53,7 +62,7 @@ LargeTasks = ["Do Comp 2655 Midterm" , "Finish Assignment 4"]
 # Create a list to hold the IntVar() variables for each checkbutton
 
 # Create checkbuttons in a for loop
-for task in LargeTasks: #replace with large task array passed args
+for task in LargeTasks: #replace with large task array passed from main object
     var = IntVar()
     check_vars.append(var)
     checkbutton = Checkbutton(large, text=task, variable=var)
