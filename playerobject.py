@@ -15,7 +15,7 @@ class Player:
         self.score = 0
         self.play_time = 0
 
-    def goals_to_goals(goals: list[str]) -> list[Goal]:
+    def goals_to_goals(self, goals: list[str]) -> list[Goal]:
         """
         Converts list of goal strings into list of custom goal objects,
         see Goal class for more information
