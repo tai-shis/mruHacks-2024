@@ -8,9 +8,7 @@ window = Tk()
 notebook = ttk.Notebook(window)
 
 # Variable to store the checkbox state
-x1 = IntVar()
-x2 = IntVar()
-x3 = IntVar()
+
 
 # Create frames for each tab
 small = Frame(notebook)
@@ -25,18 +23,41 @@ notebook.pack(expand=True, fill="both")
 
 # Add header and checkboxes to the "Small Task" tab
 Label(small, text="Small Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
-Checkbutton(small, text="Task 1: Hello World", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
-Checkbutton(small, text="Task 2: Another Task", variable=x2, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
-Checkbutton(small, text="Task 3: Final Task", variable=x3, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+SmallTasks = ["Task 1: Hello World", "Task 2: Learn Python", "Task 3: Build a GUI"]
 
+# Create a list to hold the IntVar() variables for each checkbutton
+check_vars = []
+
+# Create checkbuttons in a for loop
+for task in SmallTasks: # replace tasks with array passed from main
+    var = IntVar()
+    check_vars.append(var)
+    checkbutton = Checkbutton(small, text=task, variable=var)
+    checkbutton.pack(anchor="w", padx=20)
 # Add header and checkboxes to the "Medium Task" tab
 Label(medium, text="Medium Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
-Checkbutton(medium, text="Task 1: Medium Task 1", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
-Checkbutton(medium, text="Task 2: Medium Task 2", variable=x2, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+MediumTasks = ["Task 1: Lock in", "Task 2: Learn Tkinter", "Task 3: Build this shi","Grind"]
+
+
+# Create checkbuttons in a for loop
+for task in MediumTasks: 
+    var = IntVar()
+    check_vars.append(var)
+    checkbutton = Checkbutton(medium, text=task, variable=var)
+    checkbutton.pack(anchor="w", padx=20)
 
 # Add header and checkboxes to the "Large Task" tab
 Label(large, text="Large Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
-Checkbutton(large, text="Task 1: Large Task 1", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+
+LargeTasks = ["Do Comp 2655 Midterm" , "Finish Assignment 4"]
+# Create a list to hold the IntVar() variables for each checkbutton
+
+# Create checkbuttons in a for loop
+for task in LargeTasks: #replace with large task array passed args
+    var = IntVar()
+    check_vars.append(var)
+    checkbutton = Checkbutton(large, text=task, variable=var)
+    checkbutton.pack(anchor="w", padx=20)
 
 # Start the Tkinter event loop
 window.mainloop()
