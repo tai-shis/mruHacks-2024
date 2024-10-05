@@ -1,40 +1,42 @@
 from tkinter import *
 from tkinter import ttk
 
+# Create the main window
 window = Tk()
 
-notebook = ttk.Notebook(window) #widget that manages a collection of windows/displays
+# Create a notebook widget that manages a collection of windows/displays
+notebook = ttk.Notebook(window)
 
-small = Frame(notebook) #new frame for small task
-medium = Frame(notebook) #new frame for medium task
-large = Frame(notebook) #new frame for large task
+# Variable to store the checkbox state
+x1 = IntVar()
+x2 = IntVar()
+x3 = IntVar()
 
+# Create frames for each tab
+small = Frame(notebook)
+medium = Frame(notebook)
+large = Frame(notebook)
 
-notebook.add(small,text="Small Task")
-notebook.add(medium,text="Medium Task")
-notebook.add(large,text="Large Task")
-notebook.pack(expand=True,fill="both")  #expand = expand to fill any space not otherwise used
-                                       #fill = fill space on x and y axis
-Label(small,text="Small Task: ",width=50,height=25).pack()
-Label(medium,text="Medium Task: ",width=50,height=25).pack()
-Label(large,text="Large Task: ",width=50,height=25).pack()
+# Add the frames to the notebook (tabs)
+notebook.add(small, text="Small Task")
+notebook.add(medium, text="Medium Task")
+notebook.add(large, text="Large Task")
+notebook.pack(expand=True, fill="both")
 
+# Add header and checkboxes to the "Small Task" tab
+Label(small, text="Small Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
+Checkbutton(small, text="Task 1: Hello World", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+Checkbutton(small, text="Task 2: Another Task", variable=x2, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+Checkbutton(small, text="Task 3: Final Task", variable=x3, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
 
+# Add header and checkboxes to the "Medium Task" tab
+Label(medium, text="Medium Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
+Checkbutton(medium, text="Task 1: Medium Task 1", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+Checkbutton(medium, text="Task 2: Medium Task 2", variable=x2, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+
+# Add header and checkboxes to the "Large Task" tab
+Label(large, text="Large Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
+Checkbutton(large, text="Task 1: Large Task 1", variable=x1, onvalue=1, offvalue=0).pack(anchor="w", padx=20)
+
+# Start the Tkinter event loop
 window.mainloop()
-
-"""
-def display():
-    if (x.get()==1):
-        print("done")
-    else:
-        print("not done")
-window = Tk()
-x = IntVar()
-
-check_button = Checkbutton(window, text = "hello world",  variable = x, onvalue = 1, offvalue= 0, command= display)
-print(x)
-
-check_button.pack()
-
-window.mainloop()
-"""
