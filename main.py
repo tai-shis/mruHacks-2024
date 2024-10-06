@@ -108,6 +108,6 @@ for k, task in enumerate(large_goal_list): #replace with large task array passed
                                   command=lambda v=var, t=task: check_checkbox(v, t))
     checkbutton.pack(anchor="w", padx=20)
 
-window.attributes('-fullscreen', True)
+
 
 window.mainloop()

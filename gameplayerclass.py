@@ -16,13 +16,13 @@ class Player():
 
 
 
-class Block():
+class Block(pygame.sprite.Sprite):
     def __init__(self, position : tuple[int, int], angle : int) -> None:
 
         self.position = position #position of center
         self.angle = angle
 
-class Ball():
+class Ball(pygame.sprite.Sprite):
     def __init__(self, start_position : tuple[int,int], launch_angle : int) -> None:
         '''
             launch_angle based on the trig circle where 90 degree
@@ -39,7 +39,7 @@ class Ball():
         pass
 
 
-class Goal():
+class Goal(pygame.sprite.Sprite):
     def __init__(self) -> None:
         pass
         
