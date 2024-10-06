@@ -5,16 +5,27 @@ class Block(pygame.sprite.Sprite):
 
         self.position = position #position of center
         self.angle = angle
-        self.is_ghost = True #init as true so you can move it around when you first call the var
+        self.is_placed = False #init as true so you can move it around when you first call the var
 
-    def user_place(self):
-        pass
+    def user_place(self, mouse_button):
+        mouse_button = pygame.mouse.get_pressed()
+        mouse_pos = pygame.mouse.get_pos()
+        keys = pygame.key.get_pressed()
+        
+        if keys[pygame.K_r]: # if key pressed is r
+            #make mouse movement change the rotation
+            pass
+        elif mouse_button[0]:
+            self.place()
+        else:
+            self.position = mouse_pos
 
-    def place(self):
-        self.is_ghost = False
+    def place(self, mouse_pos):
+        self.is_placed = True
+        self.postition = mouse_pos
 
     def update(self, dt):
-        if self.is_ghost:
+        if not self.is_placed:
             self.user_place()
         else:
             #place the block or something idk
