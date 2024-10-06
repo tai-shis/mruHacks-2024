@@ -30,7 +30,7 @@ class Ball(pygame.sprite.Sprite):
         self.hitCoolDownStart = math.inf
         self.hitCoolDownDur = 0.5
         
-        #de
+        #de2
 
     def check_collision(self):
          # check if pos of ball is touching a wall or intersecting with corresponding vector direction, 
