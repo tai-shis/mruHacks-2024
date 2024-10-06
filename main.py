@@ -1,7 +1,7 @@
 import pygame
 from playerobject import Player
 import gameplayer
-import taskbar
+#import taskbar
 import playerobject
 from tkinter import *
 from tkinter import ttk
