@@ -25,7 +25,7 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.transform.smoothscale(loadify('Ball.png'),(8,8))
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
-        print(self.movement_vector)
+        ##print(self.movement_vector)
 
         self.hitCoolDown = False
         self.hitCoolDownStart = math.inf
@@ -70,14 +70,14 @@ class Ball(pygame.sprite.Sprite):
 
             for target in listOfCollideTarget:
                 target.goal_reached = True
-                print(target.goal_reached)
+                #print(target.goal_reached)
 
                 
                 
 
         if self.hitCoolDownStart + self.hitCoolDownDur < time.time() and self.hitCoolDown:
             self.hitCoolDown = False
-            print("hey yeah")
+            #print("hey yeah")
             self.hitCoolDownStart = math.inf
 
 

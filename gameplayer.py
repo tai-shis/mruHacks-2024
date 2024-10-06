@@ -83,8 +83,8 @@ class GamePlayer:
 					if e.key == pygame.K_BACKSPACE:
 						#delete most recent user block
 						if self.userBlocks:
-							print(self.userBlocks)
-							print("Block Deleted")
+							#print(self.userBlocks)
+							#print("Block Deleted")
 							self.userBlocks[-1].delete()
 	
 	def update(self, dt):
@@ -94,7 +94,7 @@ class GamePlayer:
 		self.golbalTimeText = self.my_font.render(f'Global Time {round(self.globalEndTime - time.time())}', False, (240, 240, 240))
 		if self.globalEndTime <= time.time():
 			self.gameState = "End"
-		#print(self.gameState)
+		##print(self.gameState)
 		if self.gameState == "Tutorial":
 			pass
 		elif self.gameState == "Create":
@@ -196,8 +196,8 @@ class GamePlayer:
 
 if __name__ == '__main__':
 	main = GamePlayer(999)
-	print("starting...")
+	#print("starting...")
 	main.run()
-	print("shuting down...")
+	#print("shuting down...")
         
     

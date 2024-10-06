@@ -17,21 +17,17 @@ def check_checkbox(var, task_name: str, goals: list[Goal], grant_time: int)->boo
         i += 1
 
     if var.get() == 1:
-        print (f"{task_name} is complete!")
         if not goals[i].check_status:
             player1.play_time += grant_time
             goals[i].check_status = True 
-    else:
-        print (f"{task_name} is unchecked")
+    
         
-    print(player1.play_time)
-    print(goals[i])
-    print(task_name)
 
 
 
 # Variable initializations
-player1 = Player("player33")
+playerName = input("Hello! Please enter your name: ")
+player1 = Player("playername")
 # gamer1 = gameplayer
 
 user_input_small = ""
@@ -44,35 +40,36 @@ large_goal_list = []
 
 check_vars = []
 
+print(f"Hello, {playerName}! Please group your goals from small to large.")
 
 # Get small goals from user 
-user_input_small = input("PLease put in your small goals: ")
+user_input_small = input("Please enter in your small goals (or press enter if done): ")
 if(user_input_small  != ""):
     small_goal_list.append(user_input_small)
 while(user_input_small != ""):
-    user_input_small = input("PLease put in your small goals: ")
+    user_input_small = input("Please enter in your small goals (or press enter if done): ")
     if(user_input_small  != ""):
         small_goal_list.append(user_input_small)
     
 player1.set_small_goals(small_goal_list)
 
 # Get medium goals from user 
-user_input_medium = input("PLease put in your medium goals: ")
+user_input_medium = input("Please enter in your medium goals (or press enter if done): ")
 if(user_input_medium != ""):
     medium_goal_list.append(user_input_medium)
 while(user_input_medium != ""):
-    user_input_medium = input("PLease put in your medium goals: ")
+    user_input_medium = input("Please enter in your medium goals (or press enter if done): ")
     if(user_input_medium != ""):
         medium_goal_list.append(user_input_medium)
     
 player1.set_medium_goals(medium_goal_list)
     
 # Get large goals from user
-user_input_large = input("PLease put in your large goals: ")
+user_input_large = input("Please enter in your large goals (or press enter if done): ")
 if(user_input_large != ""):
     large_goal_list.append(user_input_large)
 while(user_input_large != "" ):
-    user_input_large = input("PLease put in your large goals: ")
+    user_input_large = input("Please enter in your large goals: ")
     if(user_input_large != ""):
         large_goal_list.append(user_input_large)
     
@@ -94,9 +91,9 @@ notebook.add(large, text="Large Task")
 notebook.pack(expand=True, fill="both")
 
 #add labels
-Label(small, text="Small Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
-Label(medium, text="Medium Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
-Label(large, text="Large Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)    
+Label(small, text="Small Task Checklist", font=("Helvetica", 24, "bold")).pack(pady=10)
+Label(medium, text="Medium Task Checklist", font=("Helvetica", 24, "bold")).pack(pady=10)
+Label(large, text="Large Task Checklist", font=("Helvetica", 24, "bold")).pack(pady=10)    
 
 for i, task in enumerate(player1.small_goals):
     var = IntVar()

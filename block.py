@@ -34,7 +34,7 @@ class Block(pygame.sprite.Sprite):
             self.angle += 5
 
             self.image = pygame.transform.rotate(self.image_orgin, self.angle)
-            print(self.angle)
+            #print(self.angle)
             pass
         elif mouse_button[0] and not self.placeCoolDown:
             self.place()
