@@ -118,6 +118,6 @@ for k, task in enumerate(player1.large_goals): #replace with large task array pa
                                   command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.large_goals, 240))
     checkbutton.pack(anchor="w", padx=20)
 
-
+while 
 
 window.mainloop()
