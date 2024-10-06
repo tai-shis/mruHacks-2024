@@ -57,20 +57,11 @@ class Ball(pygame.sprite.Sprite):
             for block in listOfCollideBlocks:
                 newAngle = 2*(block.angle) - self.current_angle
                 
-                
-                '''
                 self.current_angle = newAngle
-
-                
 
                 self.movement_vector[0] = math.cos(newAngle)
                 self.movement_vector[1] = math.sin(newAngle)
-                '''
-                if block.angle%90 == 0:
-                    self.movement_vector = [self.movement_vector[0] * -1, self.movement_vector[1]]
-                else:
-                    self.movement_vector = [self.movement_vector[0], self.movement_vector[1] * -1]
-
+                
 
 
 

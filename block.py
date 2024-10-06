@@ -31,7 +31,7 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=mouse_pos)
         if keys[pygame.K_r]: # if key pressed is r
             #make mouse movement change the rotation
-            self.angle += 90
+            self.angle += 5
 
             self.image = pygame.transform.rotate(self.image_orgin, self.angle)
             print(self.angle)

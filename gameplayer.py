@@ -5,6 +5,7 @@ import ball
 import block
 import math
 import goal
+from playerobject import Player
 
 def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
