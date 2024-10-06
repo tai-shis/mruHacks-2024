@@ -6,7 +6,7 @@ def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, start_position : tuple[int,int], launch_angle : int, blockGroup) -> None:
+    def __init__(self, start_position : tuple[int,int], launch_angle : float, blockGroup) -> None:
         '''
             launch_angle based on the trig circle where 90 degree
         '''
@@ -18,12 +18,21 @@ class Ball(pygame.sprite.Sprite):
 
         self.blockGroup = blockGroup
 
-        self.movement_vector = [0, -1] #initial movement_vector at zero and spawning the ball will set one
+        self.movement_vector = [math.cos(self.current_angle), math.sin(self.current_angle)] #initial movement_vector at zero and spawning the ball will set one
         self.speed = 5
         self.image = pygame.transform.smoothscale(loadify('Ball.png'),(8,8))
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
+        print(self.movement_vector)
         #de
+
+    def check_collision(self):
+         # check if pos of ball is touching a wall or intersecting with corresponding vector direction, 
+         # if so, then flip vector
+        if self.positionX < 8 or self.positionX > 492:
+            self.movement_vector = [self.movement_vector[0] * -1, self.movement_vector[1]]
+        if self.positionY < 8 or self.positionY > 492:
+            self.movement_vector = [self.movement_vector[0], self.movement_vector[1] * -1]
 
     def spawn(self):
         #calculate random position
@@ -37,18 +46,22 @@ class Ball(pygame.sprite.Sprite):
         listOfCollideBlocks = pygame.sprite.spritecollide(self, self.blockGroup , False,  pygame.sprite.collide_rect)
         if listOfCollideBlocks:
             for block in listOfCollideBlocks:
-                block.angle
+                newAngle = 2*block.angle - self.current_angle
+                self.current_angle = newAngle
+                self.movement_vector[0] = math.cos(newAngle)
+                self.movement_vector[1] = math.sin(newAngle)
 
 
     def move(self,dt) -> None:
         #x, y = self.position[0] + self.movement_vector[0], -1 * (self.position[1] + self.movement_vector[1])
         self.positionX += self.speed * self.movement_vector[0]
         self.positionY -= self.speed * self.movement_vector[1]
-        print(self.positionY)
         self.position = [self.speed, self.speed]
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
 
     def update(self,dt):
+        self.check_collision()
+        self.hit()
         self.move(dt)
 
      

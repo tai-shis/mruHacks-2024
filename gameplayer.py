@@ -85,7 +85,7 @@ class GamePlayer:
 			pass
 		elif self.gameState == "Create":
 			if self.levelCreaterBool == False:
-				self.currentBall = ball.Ball((30,30),math.pi/2, self.blockGroup)
+				self.currentBall = ball.Ball((30,30),math.pi/13, self.blockGroup)
 				self.ballGroup.add(self.currentBall)
 				self.levelCreaterBool = True
 				self.gameState = "Play"
