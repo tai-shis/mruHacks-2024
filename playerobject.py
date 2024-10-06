@@ -1,7 +1,7 @@
 class Goal:
     def __init__(self, goal: str) -> None:
         self.goal = goal
-        self.is_completed = False #default to false, can change to true
+        self.check_status = False 
 
     def __str__(self) -> str:
         return f"[goal: {self.goal}, is_completed: {self.is_completed}]" 
