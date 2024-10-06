@@ -1,8 +1,9 @@
 import pygame
 import gameplayerclass
+
 class GamePlayer:
 	
-	def __init__(self):
+	def __init__(self, startTime : int):
 		pygame.init()
 	
 	
@@ -14,6 +15,20 @@ class GamePlayer:
 		self.ballGroup = pygame.sprite.Group()
 		self.blockGroup = pygame.sprite.Group()
 		self.blockTarget = pygame.sprite.Group()
+
+		
+		'''
+			Tutorial
+
+			CreateLevel
+			Design
+			Play
+			Next
+
+			end
+
+		'''
+		self.gameState = "Tutorial"
 	
 
 	def poll(self):
@@ -24,11 +39,47 @@ class GamePlayer:
 			elif e.type == pygame.KEYUP:
 				if e.key == pygame.K_ESCAPE:
 					self.running = False
+			
+			if self.gameState == "Tutorial":
+				if e.type == pygame.KEYUP:
+					self.gameState == "CreateLevel"
+
+			if self.gameState == "Design":
+				if e.type == pygame.KEYUP:
+					if e.key == pygame.K_RETURN:
+						self.gameState == "Play"
+					if e.key == pygame.K_DELETE:
+						#delete most recent user block
+						pass
 	
 	def update(self, dt):
 		self.ballGroup.update()
 		self.blockGroup.update()
 		self.blockTarget.update()
+
+		if self.gameState == "Tutorial":
+			pass
+		elif self.gameState == "Create":
+			#Call create Level
+			pass
+		elif self.gameState == "Design":
+			#Call create Level
+			pass
+		elif self.gameState == "Play":
+			 
+			pass
+		elif self.gameState == "Next":
+			#add points, 
+			pass
+		elif self.gameState == "End":
+			pass
+		else:
+			#Close game
+			pass
+		
+
+
+
 
 	def draw(self):
 		self.ballGroup.draw(self.screen)
@@ -36,6 +87,7 @@ class GamePlayer:
 		self.blockTarget.draw(self.screen)
 		pass
 	
+
 
 	def end(self):
 		self.running = False
@@ -56,7 +108,7 @@ class GamePlayer:
 			pygame.display.flip()
 
 if __name__ == '__main__':
-	main = GamePlayer()
+	main = GamePlayer(0)
 	print("starting...")
 	main.run()
 	print("shuting down...")
