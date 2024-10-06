@@ -7,6 +7,9 @@ import playerobject
 from tkinter import *
 from tkinter import ttk
 time = 0
+import asyncio
+import time
+
 def check_checkbox(var, task_name: str, goals: list[Goal], grant_time: int)->bool:
     #check which goal is being checked
     i = 0
@@ -99,7 +102,7 @@ for i, task in enumerate(player1.small_goals):
     var = IntVar()
     check_vars.append(var)
     checkbutton = Checkbutton(small, text=task.goal, variable=var,
-                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.small_goals, 60))
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.small_goals, 30))
     checkbutton.pack(anchor="w", padx=20)
 
 # Create checkbuttons in a for loop
@@ -107,7 +110,7 @@ for j, task in enumerate(player1.medium_goals):
     var = IntVar()
     check_vars.append(var)
     checkbutton = Checkbutton(medium, text=task.goal, variable=var,
-                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.medium_goals, 120))
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.medium_goals, 60))
     checkbutton.pack(anchor="w", padx=20)
 
     # Create checkbuttons in a for loop
@@ -115,7 +118,18 @@ for k, task in enumerate(player1.large_goals): #replace with large task array pa
     var = IntVar()
     check_vars.append(var)
     checkbutton = Checkbutton(large, text=task.goal, variable=var,
-                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.large_goals, 240))
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.large_goals, 120))
     checkbutton.pack(anchor="w", padx=20)
 
-window.mainloop()
+end_time = time.time() + 120
+curr_time = time.time()
+while curr_time < end_time:
+    if player1.play_time >= 60:
+        main = GamePlayer(player1.play_time)
+        main.run()
+        player1.play_time = 0
+        player1.score = main.currentTotalScore
+    curr_time = time.time()
+    window.update()
+
+print(f"Good job completing your tasks! Score: {player1.score}")

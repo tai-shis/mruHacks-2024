@@ -21,7 +21,7 @@ class Ball(pygame.sprite.Sprite):
         self.targetGroup = targetGroup
 
         self.movement_vector = [math.cos(self.current_angle), math.sin(self.current_angle)] #initial movement_vector at zero and spawning the ball will set one
-        self.speed = 5
+        self.speed = 10
         self.image = pygame.transform.smoothscale(loadify('Ball.png'),(8,8))
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))

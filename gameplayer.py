@@ -26,8 +26,8 @@ class GamePlayer:
 		self.blockGroup = pygame.sprite.Group()
 		self.targetGroup = pygame.sprite.Group()
 
-		self.gobalStartTime = time.time() 
-		self.gobalEndTime = time.time() + timeLimit
+		self.globalStartTime = time.time() 
+		self.globalEndTime = time.time() + timeLimit
 
 		self.localStartTime = 0
 		self.localEndTime = 0
@@ -58,7 +58,7 @@ class GamePlayer:
 
 		#text stuff
 		self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
-		self.golbalTimeText = self.my_font.render(f'Global Time {self.gobalEndTime - self.gobalStartTime}', False, (0, 0, 0))
+		self.golbalTimeText = self.my_font.render(f'Global Time {self.globalEndTime - self.globalStartTime}', False, (0, 0, 0))
 	
 	def levelMaker(self):
 		pass
@@ -91,7 +91,9 @@ class GamePlayer:
 		#self.ballGroup.update()
 		self.blockGroup.update(dt)
 		self.targetGroup.update(dt)
-		self.golbalTimeText = self.my_font.render(f'Global Time {round(self.gobalEndTime - time.time())}', False, (240, 240, 240))
+		self.golbalTimeText = self.my_font.render(f'Global Time {round(self.globalEndTime - time.time())}', False, (240, 240, 240))
+		if self.globalEndTime <= time.time():
+			self.gameState = "End"
 		#print(self.gameState)
 		if self.gameState == "Tutorial":
 			pass
@@ -138,6 +140,7 @@ class GamePlayer:
 			self.blockActive = False
 
 			if self.currentGoal.goal_reached:
+				self.currentTotalScore += 1000
 				self.gameState = "Next"
 
 			 
@@ -154,10 +157,9 @@ class GamePlayer:
 			self.gameState = "Create"
 			pass
 		elif self.gameState == "End":
-			pass
+			self.end()
 		else:
-			#Close game
-			pass
+			self.end()
 		
 
 
@@ -190,8 +192,10 @@ class GamePlayer:
 			
 			pygame.display.flip()
 
+		pygame.display.quit()
+
 if __name__ == '__main__':
-	main = GamePlayer(180)
+	main = GamePlayer(999)
 	print("starting...")
 	main.run()
 	print("shuting down...")
