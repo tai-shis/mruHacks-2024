@@ -1,6 +1,9 @@
 import pygame
 import gameplayerclass
 import time
+import ball
+import block
+import math
 
 def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
@@ -27,8 +30,14 @@ class GamePlayer:
 		self.localEndTime = 0
 
 		self.currentTotalScore = 0
+
+		self.ghostBlock = None
 		self.userBlocks = []
 
+		self.currentBall = None
+		self.levelCreaterBool = False
+
+		self.blockActive = False
 		'''
 			Tutorial
 
@@ -42,6 +51,8 @@ class GamePlayer:
 		'''
 		self.gameState = "Tutorial"
 	
+	def levelMaker(self):
+		pass
 
 	def poll(self):
 		events = pygame.event.get()
@@ -54,12 +65,12 @@ class GamePlayer:
 			
 			if self.gameState == "Tutorial":
 				if e.type == pygame.KEYUP:
-					self.gameState == "CreateLevel"
+					self.gameState = "Create"
 
 			if self.gameState == "Design":
 				if e.type == pygame.KEYUP:
 					if e.key == pygame.K_RETURN:
-						self.gameState == "Play"
+						self.gameState = "Play"
 					if e.key == pygame.K_DELETE:
 						#delete most recent user block
 						if not self.userBlocks:
@@ -69,23 +80,38 @@ class GamePlayer:
 		#self.ballGroup.update()
 		self.blockGroup.update(dt)
 		self.blockTarget.update(dt)
-
+		print(self.gameState)
 		if self.gameState == "Tutorial":
 			pass
 		elif self.gameState == "Create":
+			if self.levelCreaterBool == False:
+				self.currentBall = ball.Ball((30,30),math.pi/2, self.blockGroup)
+				self.ballGroup.add(self.currentBall)
+				self.levelCreaterBool = True
+				self.gameState = "Play"
+				
 			#Call create Level
 			pass
 		elif self.gameState == "Design":
+			if not self.blockActive:
+				self.blockActive = True
+				self.ghostBlock = block.Block((0,0),0)
+				self.blockGroup.add(self.ghostBlock)
+
+
+
 			#Call create Level
 			pass
 		elif self.gameState == "Play":
 			#Update Level
+			#clear ghost blocks
 			self.ballGroup.update(dt)
 			 
 			pass
 		elif self.gameState == "Next":
 			#add points, 
 			#clear level
+			self.levelCreaterBool = False
 			self.currentTotalScore 
 			pass
 		elif self.gameState == "End":
