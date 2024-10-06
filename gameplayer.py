@@ -1,12 +1,13 @@
 import pygame
 import gameplayerclass
-from block import Block
-from goal import Goal
+import time
 
+def loadify(img_name):
+    return pygame.image.load(img_name).convert_alpha()
 
 class GamePlayer:
 	
-	def __init__(self, startTime : int):
+	def __init__(self, timeLimit : int):
 		pygame.init()
 	
 	
@@ -19,6 +20,13 @@ class GamePlayer:
 		self.blockGroup = pygame.sprite.Group()
 		self.blockTarget = pygame.sprite.Group()
 
+		self.gobalStartTime = time.time() 
+		self.gobalEndTime = time.time() + timeLimit
+
+		self.localStartTime = 0
+		self.localEndTime = 0
+
+		self.currentTotalScore = 0
 		self.userBlocks = []
 
 		'''
@@ -54,12 +62,13 @@ class GamePlayer:
 						self.gameState == "Play"
 					if e.key == pygame.K_DELETE:
 						#delete most recent user block
-						pass
+						if not self.userBlocks:
+							self.userBlocks[-1].kill()
 	
 	def update(self, dt):
-		self.ballGroup.update()
-		self.blockGroup.update()
-		self.blockTarget.update()
+		#self.ballGroup.update()
+		self.blockGroup.update(dt)
+		self.blockTarget.update(dt)
 
 		if self.gameState == "Tutorial":
 			pass
@@ -70,10 +79,14 @@ class GamePlayer:
 			#Call create Level
 			pass
 		elif self.gameState == "Play":
+			#Update Level
+			self.ballGroup.update(dt)
 			 
 			pass
 		elif self.gameState == "Next":
 			#add points, 
+			#clear level
+			self.currentTotalScore 
 			pass
 		elif self.gameState == "End":
 			pass
@@ -111,10 +124,8 @@ class GamePlayer:
 			
 			pygame.display.flip()
 
-class 
-
 if __name__ == '__main__':
-	main = GamePlayer(0)
+	main = GamePlayer(10)
 	print("starting...")
 	main.run()
 	print("shuting down...")
