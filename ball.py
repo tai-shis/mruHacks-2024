@@ -1,6 +1,7 @@
 import pygame
 import math
 from random import randint
+import time
 
 def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
@@ -24,6 +25,11 @@ class Ball(pygame.sprite.Sprite):
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
         print(self.movement_vector)
+
+        self.hitCoolDown = False
+        self.hitCoolDownStart = math.inf
+        self.hitCoolDownDur = 0.5
+        
         #de
 
     def check_collision(self):
@@ -44,12 +50,20 @@ class Ball(pygame.sprite.Sprite):
     
     def hit(self):
         listOfCollideBlocks = pygame.sprite.spritecollide(self, self.blockGroup , False,  pygame.sprite.collide_rect)
-        if listOfCollideBlocks:
+        if listOfCollideBlocks and not self.hitCoolDown:
+            self.hitCoolDown = True
+            self.hitCoolDownStart = time.time()
             for block in listOfCollideBlocks:
                 newAngle = 2*block.angle - self.current_angle
+                print(newAngle)
                 self.current_angle = newAngle
-                self.movement_vector[0] = math.cos(newAngle)
-                self.movement_vector[1] = math.sin(newAngle)
+                self.movement_vector[0] = -math.cos(newAngle)
+                self.movement_vector[1] = -math.sin(newAngle)
+
+        if self.hitCoolDownStart + self.hitCoolDownStart > time.time():
+            self.hitCoolDown = False
+            self.hitCoolDownStart = math.inf
+
 
 
     def move(self,dt) -> None:

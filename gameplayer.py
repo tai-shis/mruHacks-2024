@@ -80,15 +80,20 @@ class GamePlayer:
 		#self.ballGroup.update()
 		self.blockGroup.update(dt)
 		self.blockTarget.update(dt)
-		print(self.gameState)
+		#print(self.gameState)
 		if self.gameState == "Tutorial":
 			pass
 		elif self.gameState == "Create":
 			if self.levelCreaterBool == False:
-				self.currentBall = ball.Ball((30,30),math.pi/13, self.blockGroup)
+				self.currentBall = ball.Ball((30,30),1, self.blockGroup)
 				self.ballGroup.add(self.currentBall)
 				self.levelCreaterBool = True
 				self.gameState = "Play"
+
+				if not self.blockActive:
+					self.blockActive = True
+					self.ghostBlock = block.Block((0,0),0)
+					self.blockGroup.add(self.ghostBlock)
 				
 			#Call create Level
 			pass
@@ -97,6 +102,7 @@ class GamePlayer:
 				self.blockActive = True
 				self.ghostBlock = block.Block((0,0),0)
 				self.blockGroup.add(self.ghostBlock)
+		
 
 
 

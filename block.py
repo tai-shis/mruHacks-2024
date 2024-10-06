@@ -1,4 +1,5 @@
 import pygame
+import math
 
 def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
@@ -11,7 +12,7 @@ class Block(pygame.sprite.Sprite):
         self.angle = angle
         self.is_placed = False #init as true so you can move it around when you first call the var
 
-        self.image = pygame.transform.smoothscale(loadify('Ball.png'),(8,8))
+        self.image = pygame.transform.smoothscale(loadify('Block.png'),(96,8))
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
 
@@ -23,7 +24,10 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=mouse_pos)
         if keys[pygame.K_r]: # if key pressed is r
             #make mouse movement change the rotation
-            print("r")
+            self.angle += math.radians(5)
+
+            self.image = pygame.transform.rotate(self.image_orgin, math.degrees(self.angle))
+            print(math.degrees(self.angle))
             pass
         elif mouse_button[0]:
             #self.place(mouse_pos)
