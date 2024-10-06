@@ -14,7 +14,7 @@ class Ball(pygame.sprite.Sprite):
 
         self.current_angle = launch_angle
 
-        self.velocity = [0, 0] #initial velocity at zero and spawning the ball will set one
+        self.movement_vector = [0, 0] #initial movement_vector at zero and spawning the ball will set one
 
         self.image = pygame.transform.smoothscale(loadify('Bullet.png').size)
         self.image_orgin = self.image
@@ -26,9 +26,10 @@ class Ball(pygame.sprite.Sprite):
         rand_x = randint(8, 500 - 8) # from dimensions with size of sprite included
         rand_y = randint(8, 500 - 8 )
         self.position = [rand_x, rand_y]
-        self.velocity = [0.5, 0.5] #arbitrary init velocity going at a 45 deg angle, random later
+        self.movement_vector = [0.5, 0.5] #arbitrary init movement_vector going at a 45 deg angle, random later
     
     def move(self) -> None:
-        pass
+        x, y = self.position[0] + self.movement_vector[0], self.position[1] + self.movement_vector[1]
+        self.position = [x, y]
 
      
