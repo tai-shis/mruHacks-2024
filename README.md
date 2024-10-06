@@ -1,1 +1,4 @@
-Start of README for mruhacks 2024 project
+Task List with built in rewards (playing game for set amount of time)
+Based off of pomodoro productivity technique
+
+Game implementation in 4D (collision engine doesnt work)
