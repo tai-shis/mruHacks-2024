@@ -46,7 +46,6 @@ check_vars = []
 user_input_small = input("PLease put in your small goals: ")
 if(user_input_small  != ""):
     small_goal_list.append(user_input_small)
-    
 while(user_input_small != ""):
     user_input_small = input("PLease put in your small goals: ")
     if(user_input_small  != ""):
