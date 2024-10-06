@@ -28,7 +28,7 @@ class Ball(pygame.sprite.Sprite):
 
         self.hitCoolDown = False
         self.hitCoolDownStart = math.inf
-        self.hitCoolDownDur = 0.5
+        self.hitCoolDownDur = 2
         
         #de2
 
@@ -49,7 +49,7 @@ class Ball(pygame.sprite.Sprite):
         pass
     
     def hit(self):
-        listOfCollideBlocks = pygame.sprite.spritecollide(self, self.blockGroup , False,  pygame.sprite.collide_rect)
+        listOfCollideBlocks = pygame.sprite.spritecollide(self, self.blockGroup , False,  pygame.sprite.collide_mask)
         if listOfCollideBlocks and not self.hitCoolDown:
             self.hitCoolDown = True
             self.hitCoolDownStart = time.time()
@@ -57,11 +57,12 @@ class Ball(pygame.sprite.Sprite):
                 newAngle = 2*block.angle - self.current_angle
                 print(newAngle)
                 self.current_angle = newAngle
-                self.movement_vector[0] = -math.cos(newAngle)
-                self.movement_vector[1] = -math.sin(newAngle)
+                self.movement_vector[0] = math.cos(newAngle)
+                self.movement_vector[1] = math.sin(newAngle)
 
-        if self.hitCoolDownStart + self.hitCoolDownStart > time.time():
+        if self.hitCoolDownStart + self.hitCoolDownDur < time.time() and self.hitCoolDown:
             self.hitCoolDown = False
+            print("hey yeah")
             self.hitCoolDownStart = math.inf
 
 
