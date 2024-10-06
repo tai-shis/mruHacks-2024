@@ -10,9 +10,9 @@ class Goal(pygame.sprite.Sprite):
         self.position = position
         self.goal_reached = False
 
-        self.image = pygame.transform.smoothscale(loadify('Ball.png'),(8,8))
+        self.image = pygame.transform.smoothscale(loadify('Ball.png'),(32,32))
         self.image_orgin = self.image
-        self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
+        self.rect = self.image.get_rect(center=(position))
 
     def update(self, dt):
         #do stuff

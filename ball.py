@@ -7,7 +7,7 @@ def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, start_position : tuple[int,int], launch_angle : float, blockGroup) -> None:
+    def __init__(self, start_position : tuple[int,int], launch_angle : float, blockGroup, targetGroup) -> None:
         '''
             launch_angle based on the trig circle where 90 degree
         '''
@@ -18,6 +18,7 @@ class Ball(pygame.sprite.Sprite):
         self.current_angle = launch_angle
 
         self.blockGroup = blockGroup
+        self.targetGroup = targetGroup
 
         self.movement_vector = [math.cos(self.current_angle), math.sin(self.current_angle)] #initial movement_vector at zero and spawning the ball will set one
         self.speed = 5
@@ -28,7 +29,7 @@ class Ball(pygame.sprite.Sprite):
 
         self.hitCoolDown = False
         self.hitCoolDownStart = math.inf
-        self.hitCoolDownDur = 2
+        self.hitCoolDownDur = 1
         
         #de2
 
@@ -54,11 +55,25 @@ class Ball(pygame.sprite.Sprite):
             self.hitCoolDown = True
             self.hitCoolDownStart = time.time()
             for block in listOfCollideBlocks:
-                newAngle = 2*block.angle - self.current_angle
+                newAngle = 2*(block.angle) - self.current_angle
                 print(newAngle)
                 self.current_angle = newAngle
+
+                
+
                 self.movement_vector[0] = math.cos(newAngle)
                 self.movement_vector[1] = math.sin(newAngle)
+
+
+        listOfCollideTarget = pygame.sprite.spritecollide(self, self.targetGroup , False,  pygame.sprite.collide_mask)
+        if listOfCollideTarget:
+
+            for target in listOfCollideTarget:
+                target.goal_reached = True
+                print(target.goal_reached)
+
+                
+                
 
         if self.hitCoolDownStart + self.hitCoolDownDur < time.time() and self.hitCoolDown:
             self.hitCoolDown = False

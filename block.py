@@ -1,5 +1,6 @@
 import pygame
 import math
+import time
 
 def loadify(img_name):
     return pygame.image.load(img_name).convert_alpha()
@@ -16,10 +17,16 @@ class Block(pygame.sprite.Sprite):
         self.image_orgin = self.image
         self.rect = self.image.get_rect(center=(self.positionX,self.positionY))
 
+        self.placeCoolDown = True
+        self.placeCoolDownStart = time.time()
+        self.placeCoolDownDur = 0.5
+
+
     def user_place(self):
         mouse_button = pygame.mouse.get_pressed()
         mouse_pos = pygame.mouse.get_pos()
         keys = pygame.key.get_pressed()
+        self.image.set_alpha(100)
         
         self.rect = self.image.get_rect(center=mouse_pos)
         if keys[pygame.K_r]: # if key pressed is r
@@ -29,16 +36,20 @@ class Block(pygame.sprite.Sprite):
             self.image = pygame.transform.rotate(self.image_orgin, math.degrees(self.angle))
             print(math.degrees(self.angle))
             pass
-        elif mouse_button[0]:
-            #self.place(mouse_pos)
-            pass
+        elif mouse_button[0] and not self.placeCoolDown:
+            self.place()
         else:
             self.position = mouse_pos
-    '''
+
+        if self.placeCoolDownStart + self.placeCoolDownDur < time.time():
+            self.placeCoolDown = False
+    
     def place(self):
+        self.image.set_alpha(255)
         self.is_placed = True
-        self.postition = mouse_pos
-    '''
+
+    def delete(self):
+        self.kill()
     def update(self, dt):
         if not self.is_placed:
             self.user_place()
@@ -48,4 +59,4 @@ class Block(pygame.sprite.Sprite):
     
     def delete(self):
         #delete a block somehow
-        pass
+        self.kill()

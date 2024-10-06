@@ -14,5 +14,4 @@ class Arrow(pygame.sprite.Sprite):
     
     def draw(self) -> None:
         # draw object @ angle
-
-        
+        pass
