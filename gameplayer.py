@@ -1,5 +1,8 @@
 import pygame
 import gameplayerclass
+from block import Block
+from goal import Goal
+
 
 class GamePlayer:
 	
@@ -107,6 +110,8 @@ class GamePlayer:
 			self.draw()
 			
 			pygame.display.flip()
+
+class 
 
 if __name__ == '__main__':
 	main = GamePlayer(0)
