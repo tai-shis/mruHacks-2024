@@ -7,19 +7,22 @@ import playerobject
 from tkinter import *
 from tkinter import ttk
 time = 0
-def check_checkbox(var, task_name, task: Goal)->bool:
+def check_checkbox(var, task_name: str, goals: list[Goal], grant_time: int)->bool:
+    #check which goal is being checked
+    i = 0
+    while(task_name != goals[i].goal): #while goal name/string doesnt match increment counter
+        i += 1
 
-    global time
     if var.get() == 1:
         print (f"{task_name} is complete!")
-        if not task.check_status:
-            time += 60
-            task.check_status = True 
+        if not goals[i].check_status:
+            player1.play_time += grant_time
+            goals[i].check_status = True 
     else:
         print (f"{task_name} is unchecked")
         
-    print(time)
-    print(task)
+    print(player1.play_time)
+    print(goals[i])
     print(task_name)
 
 
@@ -97,23 +100,23 @@ for i, task in enumerate(player1.small_goals):
     var = IntVar()
     check_vars.append(var)
     checkbutton = Checkbutton(small, text=task.goal, variable=var,
-                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, task))
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.small_goals, 60))
     checkbutton.pack(anchor="w", padx=20)
 
 # Create checkbuttons in a for loop
-for j, task in enumerate(medium_goal_list): 
+for j, task in enumerate(player1.medium_goals): 
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(medium, text=task, variable=var,
-                                  command=lambda v=var, t=task: check_checkbox(v, t))
+    checkbutton = Checkbutton(medium, text=task.goal, variable=var,
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.medium_goals, 120))
     checkbutton.pack(anchor="w", padx=20)
 
     # Create checkbuttons in a for loop
-for k, task in enumerate(large_goal_list): #replace with large task array passed from main object
+for k, task in enumerate(player1.large_goals): #replace with large task array passed from main object
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(large, text=task, variable=var,
-                                  command=lambda v=var, t=task: check_checkbox(v, t))
+    checkbutton = Checkbutton(large, text=task.goal, variable=var,
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.large_goals, 240))
     checkbutton.pack(anchor="w", padx=20)
 
 
