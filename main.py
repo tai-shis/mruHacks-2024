@@ -1,20 +1,28 @@
 import pygame
 from playerobject import Player
+from playerobject import Goal
 import gameplayer
 #import taskbar
 import playerobject
 from tkinter import *
 from tkinter import ttk
+time = 0
+def check_checkbox(var, task_name, task: Goal)->bool:
 
-def check_checkbox(var, task_name)->bool:
+    global time
     if var.get() == 1:
         print (f"{task_name} is complete!")
-        return True
-        
-
+        if not task.check_status:
+            time += 60
+            task.check_status = True 
     else:
         print (f"{task_name} is unchecked")
-        return False
+        
+    print(time)
+    print(task)
+    print(task_name)
+
+
 
 # Variable initializations
 player1 = Player("player33")
@@ -85,11 +93,11 @@ Label(small, text="Small Task Checklist", font=("Helvetica", 16, "bold")).pack(p
 Label(medium, text="Medium Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)
 Label(large, text="Large Task Checklist", font=("Helvetica", 16, "bold")).pack(pady=10)    
 
-for i, task in enumerate(small_goal_list):
+for i, task in enumerate(player1.small_goals):
     var = IntVar()
     check_vars.append(var)
-    checkbutton = Checkbutton(small, text=task, variable=var,
-                                  command=lambda v=var, t=task: check_checkbox(v, t))
+    checkbutton = Checkbutton(small, text=task.goal, variable=var,
+                                  command=lambda v=var, t=task.goal: check_checkbox(v, t, task))
     checkbutton.pack(anchor="w", padx=20)
 
 # Create checkbuttons in a for loop
