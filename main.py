@@ -1,7 +1,7 @@
 import pygame
 from playerobject import Player
 from playerobject import Goal
-import gameplayer
+# import gameplayer
 #import taskbar
 import playerobject
 from tkinter import *
@@ -29,7 +29,7 @@ def check_checkbox(var, task_name: str, goals: list[Goal], grant_time: int)->boo
 
 # Variable initializations
 player1 = Player("player33")
-gamer1 = gameplayer
+# gamer1 = gameplayer
 
 user_input_small = ""
 user_input_medium = ""

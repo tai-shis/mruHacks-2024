@@ -2,7 +2,7 @@ import pygame
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, position : tuple[int, int], angle : int) -> None:
-
+        pygame.sprite.Sprite.__init__(self)
         self.position = position #position of center
         self.angle = angle
         self.is_placed = False #init as true so you can move it around when you first call the var

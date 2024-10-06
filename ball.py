@@ -9,6 +9,7 @@ class Ball(pygame.sprite.Sprite):
         '''
             launch_angle based on the trig circle where 90 degree
         '''
+        pygame.sprite.Sprite.__init__(self)
         self.position = start_position
 
         self.current_angle = launch_angle
