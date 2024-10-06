@@ -1,7 +1,7 @@
 import pygame
 from playerobject import Player
 from playerobject import Goal
-# import gameplayer
+from gameplayer import GamePlayer
 #import taskbar
 import playerobject
 from tkinter import *
@@ -117,7 +117,5 @@ for k, task in enumerate(player1.large_goals): #replace with large task array pa
     checkbutton = Checkbutton(large, text=task.goal, variable=var,
                                   command=lambda v=var, t=task.goal: check_checkbox(v, t, player1.large_goals, 240))
     checkbutton.pack(anchor="w", padx=20)
-
-while 
 
 window.mainloop()
