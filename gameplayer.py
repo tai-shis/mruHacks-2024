@@ -16,7 +16,8 @@ class GamePlayer:
 		self.blockGroup = pygame.sprite.Group()
 		self.blockTarget = pygame.sprite.Group()
 
-		
+		self.userBlocks = []
+
 		'''
 			Tutorial
 
